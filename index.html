@@ -3,757 +3,271 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AODR 2026 — Anglesey Offshore Dinghy Race</title>
+<title>Anglesey Offshore Dinghy Race 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0d1b2a;
-    --deep: #0a1520;
-    --ocean: #1a3a5c;
-    --slate: #2d5f8a;
-    --teal: #00a8b5;
-    --cream: #f4efe8;
-    --warm: #e8dfd2;
-    --gold: #c9a84c;
-    --light: #8ab4cc;
-  }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  :root {
+    --navy: #0a1520;
+    --teal: #00a8b5;
+    --cream: #f2ece3;
+    --gold: #c9a84c;
+    --light: rgba(242,236,227,0.65);
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'DM Sans', sans-serif;
+  }
 
   body {
-    background: var(--deep);
+    background: var(--navy);
     color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
-
-  /* HERO */
-  .hero {
     min-height: 100vh;
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 4rem 2rem 5rem;
+  }
+
+  /* PHOTO HERO — full bleed */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
     overflow: hidden;
+    display: flex;
+    align-items: flex-end;
   }
 
-  .hero-bg {
+  .hero-img {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(26,58,92,0.6) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(0,168,181,0.15) 0%, transparent 60%),
-      linear-gradient(180deg, var(--deep) 0%, var(--navy) 50%, #0b2035 100%);
-    z-index: 0;
-  }
-
-  /* animated water lines */
-  .wave-container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 220px;
-    z-index: 1;
-    opacity: 0.25;
-  }
-
-  .wave {
-    position: absolute;
-    bottom: 0;
-    left: -100%;
-    width: 300%;
+    width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: brightness(0.75) saturate(1.1);
   }
 
-  .wave svg { width: 100%; height: 100%; }
-
-  .wave-1 { animation: waveflow 12s linear infinite; opacity: 0.6; }
-  .wave-2 { animation: waveflow 18s linear infinite reverse; opacity: 0.4; bottom: 20px; }
-  .wave-3 { animation: waveflow 24s linear infinite; opacity: 0.3; bottom: 40px; }
-
-  @keyframes waveflow {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(33.33%); }
-  }
-
-  /* star field */
-  .stars {
+  /* gradient overlay — dark at bottom for text legibility */
+  .hero-overlay {
     position: absolute;
     inset: 0;
-    z-index: 0;
-    background-image:
-      radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 45% 10%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
-      radial-gradient(1px 1px at 85% 5%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 30% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 55% 25%, rgba(201,168,76,0.8) 0%, transparent 100%),
-      radial-gradient(1px 1px at 90% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 10% 40%, rgba(255,255,255,0.6) 0%, transparent 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(10,21,32,0.2) 0%,
+      rgba(10,21,32,0.1) 40%,
+      rgba(10,21,32,0.7) 75%,
+      rgba(10,21,32,0.95) 100%
+    );
   }
 
   .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 900px;
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
   }
 
-  .race-label {
+  .race-tag {
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--teal);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     opacity: 0;
-    animation: fadeup 0.8s ease forwards 0.3s;
+    animation: rise 1s ease forwards 0.4s;
   }
 
-  .hero h1 {
+  h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-size: clamp(2.8rem, 8vw, 6.5rem);
     font-weight: 900;
-    line-height: 0.9;
+    line-height: 0.95;
     letter-spacing: -0.02em;
     color: var(--cream);
     opacity: 0;
-    animation: fadeup 1s ease forwards 0.5s;
+    animation: rise 1s ease forwards 0.6s;
   }
 
-  .hero h1 em {
+  h1 em {
     font-style: italic;
     color: var(--teal);
   }
 
-  .hero-sub {
-    margin-top: 2rem;
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--light);
-    max-width: 560px;
-    line-height: 1.6;
+  .rule {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 2rem 0;
     opacity: 0;
-    animation: fadeup 1s ease forwards 0.8s;
+    animation: rise 1s ease forwards 0.9s;
   }
 
-  .hero-meta {
-    margin-top: 2.5rem;
-    display: flex;
-    gap: 2.5rem;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeup 1s ease forwards 1s;
-  }
-
-  .meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .meta-label {
+  .date-line {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold);
-  }
-
-  .meta-value {
-    font-size: 1rem;
-    color: var(--cream);
-    font-weight: 400;
-  }
-
-  .cta-row {
-    margin-top: 3rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
     opacity: 0;
-    animation: fadeup 1s ease forwards 1.2s;
+    animation: rise 1s ease forwards 1s;
   }
 
-  .btn {
-    display: inline-block;
-    padding: 0.85rem 2rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid;
-    transition: all 0.3s ease;
-    cursor: pointer;
+  /* ANNOUNCEMENT PANEL */
+  .announcement {
+    background: rgba(10,21,32,0.95);
+    border-top: 1px solid rgba(255,255,255,0.07);
   }
 
-  .btn-primary {
-    background: var(--teal);
-    border-color: var(--teal);
-    color: var(--deep);
-  }
-
-  .btn-primary:hover {
-    background: transparent;
-    color: var(--teal);
-  }
-
-  .btn-outline {
-    background: transparent;
-    border-color: rgba(244,239,232,0.3);
-    color: var(--cream);
-  }
-
-  .btn-outline:hover {
-    border-color: var(--cream);
-  }
-
-  /* SECTIONS */
-  section {
-    max-width: 1100px;
+  .announcement-inner {
+    max-width: 860px;
     margin: 0 auto;
-    padding: 6rem 2rem;
+    padding: 3.5rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
   }
 
-  .section-label {
+  @media (max-width: 640px) {
+    .announcement-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2.5rem 1.5rem 3rem;
+    }
+  }
+
+  .announce-text p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.8;
+    color: var(--light);
+    font-weight: 300;
+  }
+
+  .announce-text p strong {
+    color: var(--cream);
+    font-weight: 600;
+  }
+
+  .announce-contact {
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 2.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .announce-contact {
+      border-left: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-left: 0;
+      padding-top: 2rem;
+    }
+  }
+
+  .contact-label {
     font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--teal);
     margin-bottom: 1rem;
   }
 
-  h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.1;
+  .contact-link {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
     color: var(--cream);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 0.75rem;
     margin-bottom: 1.5rem;
+    transition: color 0.2s, border-color 0.2s;
   }
 
-  h2 em {
-    font-style: italic;
+  .contact-link:hover {
     color: var(--teal);
+    border-color: var(--teal);
   }
 
-  p {
-    color: var(--light);
-    line-height: 1.8;
-    font-size: 1.05rem;
-    max-width: 680px;
-  }
-
-  /* DIVIDER */
-  .divider {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.08);
-  }
-
-  /* ABOUT GRID */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-    margin-top: 1rem;
-  }
-
-  @media (max-width: 700px) {
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-  }
-
-  .about-grid p { max-width: 100%; }
-
-  /* PILLARS */
-  .pillars {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  @media (max-width: 700px) {
-    .pillars { grid-template-columns: 1fr; }
-  }
-
-  .pillar {
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 2rem;
-    position: relative;
-    transition: border-color 0.3s ease;
-  }
-
-  .pillar:hover { border-color: var(--teal); }
-
-  .pillar-icon {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .pillar h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--cream);
-    margin-bottom: 0.75rem;
-  }
-
-  .pillar p {
-    font-size: 0.9rem;
-    max-width: 100%;
-    color: var(--light);
-  }
-
-  /* FORMAT */
-  .format-section {
-    background: rgba(26,58,92,0.2);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .format-section section {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-
-  .format-details {
-    margin-top: 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-
-  @media (max-width: 700px) {
-    .format-details { grid-template-columns: 1fr; }
-  }
-
-  .detail-block {
-    border-left: 2px solid var(--teal);
-    padding-left: 1.5rem;
-  }
-
-  .detail-block h4 {
+  .club-detail {
     font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+    color: rgba(242,236,227,0.35);
+    line-height: 1.8;
   }
-
-  .detail-block p {
-    font-size: 0.95rem;
-    max-width: 100%;
-  }
-
-  /* ELIGIBILITY */
-  .elig-list {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .elig-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    font-size: 0.95rem;
-    color: var(--light);
-    line-height: 1.5;
-  }
-
-  .elig-item::before {
-    content: '—';
-    color: var(--teal);
-    flex-shrink: 0;
-    font-family: 'DM Mono', monospace;
-  }
-
-  /* DOCS */
-  .docs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
-    margin-top: 2.5rem;
-  }
-
-  .doc-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    border: 1px solid rgba(255,255,255,0.1);
-    text-decoration: none;
-    color: var(--cream);
-    transition: all 0.25s ease;
-    font-size: 0.9rem;
-  }
-
-  .doc-link:hover {
-    border-color: var(--teal);
-    background: rgba(0,168,181,0.05);
-    color: var(--teal);
-  }
-
-  .doc-icon {
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-
-  /* CONTACT */
-  .contact-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 3rem;
-    flex-wrap: wrap;
-  }
-
-  .contact-content p { font-size: 1rem; }
-
-  .contact-details {
-    flex-shrink: 0;
-  }
-
-  .contact-item {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
-    color: var(--light);
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-item a {
-    color: var(--teal);
-    text-decoration: none;
-  }
-
-  .contact-item a:hover { text-decoration: underline; }
 
   /* FOOTER */
   footer {
     border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 2.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .footer-left {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
-  }
-
-  .footer-right {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.25);
-  }
-
-  /* SCROLL ANIMATIONS */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  @keyframes fadeup {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
     padding: 1.5rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background 0.4s ease, padding 0.4s ease;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
   }
 
-  nav.scrolled {
-    background: rgba(10,21,32,0.95);
-    backdrop-filter: blur(8px);
-    padding: 1rem 2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .nav-logo {
+  .footer-logo {
     font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer-credit {
     font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--cream);
-    text-decoration: none;
+    color: rgba(255,255,255,0.2);
+    font-style: italic;
   }
 
-  .nav-logo span { color: var(--teal); }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--teal); }
-
-  @media (max-width: 600px) {
-    .nav-links { display: none; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="#" class="nav-logo">AODR <span>2026</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#format">Format</a></li>
-    <li><a href="#enter">Enter</a></li>
-    <li><a href="#docs">Documents</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="stars"></div>
-  <div class="wave-container">
-    <div class="wave wave-1">
-      <svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,80 C180,140 360,20 540,80 C720,140 900,20 1080,80 C1260,140 1440,60 1440,60 L1440,220 L0,220 Z" fill="rgba(0,168,181,0.3)"/>
-      </svg>
-    </div>
-    <div class="wave wave-2">
-      <svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,100 C240,40 480,160 720,100 C960,40 1200,140 1440,100 L1440,220 L0,220 Z" fill="rgba(26,58,92,0.5)"/>
-      </svg>
-    </div>
-    <div class="wave wave-3">
-      <svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,120 C300,60 600,180 900,120 C1200,60 1320,140 1440,110 L1440,220 L0,220 Z" fill="rgba(13,27,42,0.8)"/>
-      </svg>
-    </div>
-  </div>
-
+  <img class="hero-img" src="photo.jpg" alt="Racing dinghy at the Anglesey Offshore Dinghy Race">
+  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="race-label">Red Wharf Bay Sailing &amp; Watersports Club — North Wales</p>
+    <p class="race-tag">Red Wharf Bay Sailing &amp; Watersports Club — North Wales</p>
     <h1>Anglesey<br><em>Offshore</em><br>Dinghy Race</h1>
-    <p class="hero-sub">A coastal endurance challenge around the Isle of Anglesey. Starting and finishing at Traeth Bychan — adventure, accessibility and strong safety management in a revitalised format.</p>
-    <div class="hero-meta">
-      <div class="meta-item">
-        <span class="meta-label">Edition</span>
-        <span class="meta-value">2026</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Location</span>
-        <span class="meta-value">Traeth Bychan, Anglesey</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Format</span>
-        <span class="meta-value">Four Islands Coastal Challenge</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">Handicap</span>
-        <span class="meta-value">RRS 2025–2028</span>
-      </div>
-    </div>
-    <div class="cta-row">
-      <a href="#enter" class="btn btn-primary">Enter the Race</a>
-      <a href="#docs" class="btn btn-outline">Race Documents</a>
-    </div>
+    <div class="rule"></div>
+    <p class="date-line">Sunday 9 August 2026 &mdash; Traeth Bychan</p>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <p class="section-label reveal">The Race</p>
-  <h2 class="reveal">One of North Wales'<br><em>most iconic</em> endurance events</h2>
-  <div class="about-grid">
-    <div class="reveal">
-      <p>AODR 2026 marks the return of a legendary event — rebuilt for a new era. Following a pause in 2025 to ensure long-term sustainability, the race is back with a format that fits volunteer capacity while growing participation steadily year on year.</p>
+<div class="announcement">
+  <div class="announcement-inner">
+    <div class="announce-text">
+      <p>The <strong>Anglesey Offshore Dinghy Race</strong> returns in 2026 on <strong>Sunday 9 August</strong>, featuring a new Four Islands course starting and finishing at Red Wharf Bay Sailing &amp; Watersports Club, Traeth Bychan.</p>
+      <p style="margin-top:1.25rem;">Full Notice of Race and further details will be published shortly.</p>
     </div>
-    <div class="reveal">
-      <p>The goal is not simply to run a race, but to rebuild offshore-style endurance sailing on Anglesey — developing race management and safety capability within the club and creating a flagship annual event that reflects the ambition and community spirit of RWBSWC.</p>
-    </div>
-  </div>
-
-  <div class="pillars">
-    <div class="pillar reveal">
-      <div class="pillar-icon">⚓</div>
-      <h3>Adventurous</h3>
-      <p>True coastal sailing with a proper offshore feel. The Four Islands format delivers Anglesey's finest headlands and waters.</p>
-    </div>
-    <div class="pillar reveal">
-      <div class="pillar-icon">⛵</div>
-      <h3>Accessible</h3>
-      <p>Designed to welcome club sailors and travelling competitors alike. Open to a wide range of monohull dinghies and selected non-foiling multihulls.</p>
-    </div>
-    <div class="pillar reveal">
-      <div class="pillar-icon">🛟</div>
-      <h3>Safety-Focused</h3>
-      <p>Run in line with RYA guidance and supported by experienced safety crews throughout. Competitor safety is the first and final consideration.</p>
+    <div class="announce-contact">
+      <p class="contact-label">Enquiries</p>
+      <a href="/cdn-cgi/l/email-protection#eb8a848f99ab998e8f9c838a998d898a929888c58884c59e80" class="contact-link"><span class="__cf_email__" data-cfemail="1a7b757e685a687f7e6d727b687c787b636979347975346f71">[email&#160;protected]</span></a>
+      <p class="club-detail">
+        Red Wharf Bay Sailing<br>
+        &amp; Watersports Club<br>
+        Traeth Bychan, Anglesey
+      </p>
     </div>
   </div>
-</section>
-
-<hr class="divider">
-
-<!-- FORMAT -->
-<div class="format-section" id="format">
-  <section>
-    <p class="section-label reveal">Race Format</p>
-    <h2 class="reveal">A Four Islands<br><em>Coastal Challenge</em></h2>
-    <p class="reveal">The 2026 edition evolves into a scenic coastal endurance race around the Anglesey coastline — retaining the spirit of adventure that defines the Offshore, while delivering a format that is achievable, safe and sustainable.</p>
-    <div class="format-details">
-      <div class="detail-block reveal">
-        <h4>Start &amp; Finish</h4>
-        <p>Traeth Bychan, Red Wharf Bay, Isle of Anglesey</p>
-      </div>
-      <div class="detail-block reveal">
-        <h4>Format</h4>
-        <p>Four Islands-style coastal course. Full details in the Sailing Instructions.</p>
-      </div>
-      <div class="detail-block reveal">
-        <h4>Eligibility</h4>
-        <p>Monohull dinghies; selected non-foiling multihulls. Subject to Notice of Race.</p>
-      </div>
-      <div class="detail-block reveal">
-        <h4>Handicap System</h4>
-        <p>Handicap racing under the 2025–2028 Racing Rules of Sailing.</p>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ENTER -->
-<section id="enter">
-  <p class="section-label reveal">Entries</p>
-  <h2 class="reveal">Enter <em>AODR 2026</em></h2>
-  <p class="reveal">Entry details, closing dates and fees are set out in the Notice of Race. All competitors should read the Sailing Instructions and Safety Requirements before entering.</p>
-  <div class="cta-row reveal" style="margin-top: 2rem; opacity: 1; animation: none;">
-    <a href="#" class="btn btn-primary">Entry Form</a>
-    <a href="#docs" class="btn btn-outline">Read the NOR</a>
-  </div>
-  <div class="elig-list reveal" style="margin-top: 3rem;">
-    <div class="elig-item">Open to monohull dinghies and selected non-foiling multihulls</div>
-    <div class="elig-item">All competitors must comply with the safety requirements in the Sailing Instructions</div>
-    <div class="elig-item">Visiting competitors are warmly welcomed</div>
-    <div class="elig-item">Handicap racing — a level playing field for all classes</div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- DOCUMENTS -->
-<section id="docs">
-  <p class="section-label reveal">Documentation</p>
-  <h2 class="reveal">Race <em>Documents</em></h2>
-  <p class="reveal">All official documents are published below. Check back as the event approaches — documents will be updated as the race date nears.</p>
-  <div class="docs-grid">
-    <a href="#" class="doc-link reveal">
-      <span class="doc-icon">📄</span>
-      <span>Notice of Race</span>
-    </a>
-    <a href="#" class="doc-link reveal">
-      <span class="doc-icon">📋</span>
-      <span>Sailing Instructions</span>
-    </a>
-    <a href="#" class="doc-link reveal">
-      <span class="doc-icon">🛟</span>
-      <span>Safety Requirements</span>
-    </a>
-    <a href="#" class="doc-link reveal">
-      <span class="doc-icon">📝</span>
-      <span>Entry Form</span>
-    </a>
-    <a href="#" class="doc-link reveal">
-      <span class="doc-icon">🗺️</span>
-      <span>Course Chart</span>
-    </a>
-    <a href="#" class="doc-link reveal">
-      <span class="doc-icon">📞</span>
-      <span>Competitor Briefing Notes</span>
-    </a>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <p class="section-label reveal">Get in Touch</p>
-  <h2 class="reveal">Contact &amp;<br><em>Enquiries</em></h2>
-  <div class="contact-content">
-    <div class="reveal">
-      <p>For race enquiries, entry queries or safety questions, please get in touch with the race organisers at Red Wharf Bay Sailing &amp; Watersports Club. We'll do our best to respond promptly.</p>
-    </div>
-    <div class="contact-details reveal">
-      <div class="contact-item">Race Organiser<br><a href="mailto:race@rwbswc.org.uk">race@rwbswc.org.uk</a></div>
-      <div class="contact-item" style="margin-top:1rem;">Red Wharf Bay S&amp;WC<br><a href="https://www.rwbswc.org.uk" target="_blank">rwbswc.org.uk</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span class="footer-left">AODR 2026 — Anglesey Offshore Dinghy Race</span>
-  <span class="footer-right">Organised by Red Wharf Bay Sailing &amp; Watersports Club · Racing Rules of Sailing 2025–2028</span>
-</footer>
-
-<script>
-  // Nav scroll effect
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 100);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  reveals.forEach(el => observer.observe(el));
-</script>
-</body>
-</html>
+  <footer>
+    <span cl
