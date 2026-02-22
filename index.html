@@ -10,35 +10,37 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy: #0a1520;
+    --navy: #0d1f2d;
+    --deep: #0a1520;
     --teal: #00a8b5;
     --cream: #f2ece3;
     --gold: #c9a84c;
-    --light: rgba(242,236,227,0.65);
+    --muted: rgba(242,236,227,0.6);
   }
 
   html, body {
     height: 100%;
     font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
   }
 
   body {
-    background: var(--navy);
+    background: var(--deep);
     color: var(--cream);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
   }
 
-  /* PHOTO HERO — full bleed */
   .hero {
     position: relative;
     width: 100%;
     height: 100vh;
-    min-height: 600px;
+    min-height: 580px;
     overflow: hidden;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .hero-img {
@@ -47,52 +49,76 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 30%;
-    filter: brightness(0.75) saturate(1.1);
+    object-position: center 35%;
+    filter: brightness(0.7) saturate(1.1);
   }
 
-  /* gradient overlay — dark at bottom for text legibility */
   .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(10,21,32,0.2) 0%,
-      rgba(10,21,32,0.1) 40%,
-      rgba(10,21,32,0.7) 75%,
-      rgba(10,21,32,0.95) 100%
+      rgba(10,21,32,0.55) 0%,
+      rgba(10,21,32,0.15) 45%,
+      rgba(10,21,32,0.75) 80%,
+      rgba(10,21,32,0.97) 100%
     );
+  }
+
+  .topbar {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.75rem 2.5rem;
+  }
+
+  .club-logo {
+    height: 52px;
+    width: auto;
+    opacity: 0;
+    animation: rise 0.8s ease forwards 0.3s;
+  }
+
+  .topbar-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(242,236,227,0.5);
+    text-align: right;
+    opacity: 0;
+    animation: rise 0.8s ease forwards 0.5s;
   }
 
   .hero-content {
     position: relative;
     z-index: 2;
-    width: 100%;
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 2rem 4rem;
+    padding: 0 2.5rem 4.5rem;
+    max-width: 900px;
   }
 
   .race-tag {
     font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--teal);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.25rem;
     opacity: 0;
-    animation: rise 1s ease forwards 0.4s;
+    animation: rise 0.9s ease forwards 0.6s;
   }
 
   h1 {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 8vw, 6.5rem);
+    font-size: clamp(3rem, 9vw, 7rem);
     font-weight: 900;
-    line-height: 0.95;
+    line-height: 0.92;
     letter-spacing: -0.02em;
     color: var(--cream);
     opacity: 0;
-    animation: rise 1s ease forwards 0.6s;
+    animation: rise 1s ease forwards 0.8s;
   }
 
   h1 em {
@@ -101,74 +127,75 @@
   }
 
   .rule {
-    width: 48px;
+    width: 44px;
     height: 1px;
     background: var(--gold);
-    margin: 2rem 0;
+    margin: 2rem 0 1.5rem;
     opacity: 0;
-    animation: rise 1s ease forwards 0.9s;
+    animation: rise 0.9s ease forwards 1.1s;
   }
 
   .date-line {
     font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 0.5rem;
     opacity: 0;
-    animation: rise 1s ease forwards 1s;
+    animation: rise 0.9s ease forwards 1.2s;
   }
 
-  /* ANNOUNCEMENT PANEL */
   .announcement {
-    background: rgba(10,21,32,0.95);
+    background: var(--navy);
     border-top: 1px solid rgba(255,255,255,0.07);
+    flex: 1;
   }
 
   .announcement-inner {
-    max-width: 860px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 3.5rem 2rem 4rem;
+    padding: 3.5rem 2.5rem 4rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
     align-items: start;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 660px) {
     .announcement-inner {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 2.5rem;
       padding: 2.5rem 1.5rem 3rem;
     }
+    h1 { font-size: clamp(2.8rem, 12vw, 5rem); }
+    .topbar { padding: 1.25rem 1.5rem; }
+    .hero-content { padding: 0 1.5rem 3.5rem; }
+    .contact-block { text-align: left; }
   }
 
   .announce-text p {
     font-family: 'DM Sans', sans-serif;
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    line-height: 1.8;
-    color: var(--light);
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    line-height: 1.85;
+    color: var(--muted);
     font-weight: 300;
+    max-width: 520px;
   }
 
   .announce-text p strong {
     color: var(--cream);
-    font-weight: 600;
+    font-weight: 500;
   }
 
-  .announce-contact {
-    border-left: 1px solid rgba(255,255,255,0.1);
-    padding-left: 2.5rem;
+  .announce-text p + p {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: rgba(242,236,227,0.4);
   }
 
-  @media (max-width: 640px) {
-    .announce-contact {
-      border-left: none;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding-left: 0;
-      padding-top: 2rem;
-    }
+  .contact-block {
+    text-align: right;
+    flex-shrink: 0;
   }
 
   .contact-label {
@@ -177,65 +204,65 @@
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--teal);
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
+    display: block;
   }
 
-  .contact-link {
-    display: block;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
+  .contact-email {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
     color: var(--cream);
     text-decoration: none;
     border-bottom: 1px solid rgba(255,255,255,0.15);
-    padding-bottom: 0.75rem;
-    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    display: inline-block;
     transition: color 0.2s, border-color 0.2s;
   }
 
-  .contact-link:hover {
+  .contact-email:hover {
     color: var(--teal);
     border-color: var(--teal);
   }
 
-  .club-detail {
+  .contact-club {
+    margin-top: 1.25rem;
     font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
-    color: rgba(242,236,227,0.35);
-    line-height: 1.8;
+    color: rgba(242,236,227,0.25);
+    line-height: 1.9;
   }
 
-  /* FOOTER */
   footer {
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 1.5rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 1.5rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    max-width: 860px;
+    gap: 0.75rem;
+    max-width: 900px;
     margin: 0 auto;
     width: 100%;
   }
 
-  .footer-logo {
+  .footer-left {
     font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.2);
   }
 
-  .footer-credit {
+  .footer-right {
     font-size: 0.75rem;
-    color: rgba(255,255,255,0.2);
     font-style: italic;
+    color: rgba(255,255,255,0.18);
   }
 
   @keyframes rise {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 </style>
@@ -245,8 +272,22 @@
 <div class="hero">
   <img class="hero-img" src="photo.jpg" alt="Racing dinghy at the Anglesey Offshore Dinghy Race">
   <div class="hero-overlay"></div>
+
+  <div class="topbar">
+    <a href="https://www.redwharfbaysc.co.uk" target="_blank">
+      <img
+        class="club-logo"
+        src="https://cdn.prod.website-files.com/604382581021242d1759c052/6074191ce5f2cea4e7f01bc4_RWBSWC%20Logo%20white%20-01.svg"
+        alt="Red Wharf Bay Sailing & Watersports Club"
+      >
+    </a>
+    <div class="topbar-right">
+      Traeth Bychan · Anglesey<br>VHF Ch37
+    </div>
+  </div>
+
   <div class="hero-content">
-    <p class="race-tag">Red Wharf Bay Sailing &amp; Watersports Club — North Wales</p>
+    <p class="race-tag">Red Wharf Bay Sailing &amp; Watersports Club presents</p>
     <h1>Anglesey<br><em>Offshore</em><br>Dinghy Race</h1>
     <div class="rule"></div>
     <p class="date-line">Sunday 9 August 2026 &mdash; Traeth Bychan</p>
@@ -257,17 +298,25 @@
   <div class="announcement-inner">
     <div class="announce-text">
       <p>The <strong>Anglesey Offshore Dinghy Race</strong> returns in 2026 on <strong>Sunday 9 August</strong>, featuring a new Four Islands course starting and finishing at Red Wharf Bay Sailing &amp; Watersports Club, Traeth Bychan.</p>
-      <p style="margin-top:1.25rem;">Full Notice of Race and further details will be published shortly.</p>
+      <p>Full Notice of Race and further details will be published shortly.</p>
     </div>
-    <div class="announce-contact">
-      <p class="contact-label">Enquiries</p>
-      <a href="/cdn-cgi/l/email-protection#eb8a848f99ab998e8f9c838a998d898a929888c58884c59e80" class="contact-link"><span class="__cf_email__" data-cfemail="1a7b757e685a687f7e6d727b687c787b636979347975346f71">[email&#160;protected]</span></a>
-      <p class="club-detail">
+    <div class="contact-block">
+      <span class="contact-label">Enquiries</span>
+      <a href="mailto:aodr@redwharfbaysc.co.uk" class="contact-email">aodr@redwharfbaysc.co.uk</a>
+      <div class="contact-club">
         Red Wharf Bay Sailing<br>
         &amp; Watersports Club<br>
-        Traeth Bychan, Anglesey
-      </p>
+        Traeth Bychan, Anglesey<br>
+        LL73 8PN
+      </div>
     </div>
   </div>
+
   <footer>
-    <span cl
+    <span class="footer-left">AODR 2026 &mdash; Anglesey Offshore Dinghy Race</span>
+    <span class="footer-right">Photo: Paul Hargreaves Photography</span>
+  </footer>
+</div>
+
+</body>
+</html>
