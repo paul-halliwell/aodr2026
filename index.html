@@ -16,22 +16,68 @@
     --cream: #f2ece3;
     --gold: #c9a84c;
     --muted: rgba(242,236,227,0.6);
+    --faint: rgba(242,236,227,0.45);
+    --rule: rgba(255,255,255,0.07);
   }
 
-  html, body {
-    height: 100%;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--deep);
     color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
   }
 
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,21,32,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2.5rem;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(-60px);
+    transition: transform 0.4s ease;
+  }
+  nav.visible { transform: translateY(0); }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cream); }
+
+  @media (max-width: 660px) {
+    .nav-links { display: none; }
+  }
+
+  /* ── HERO ── */
   .hero {
     position: relative;
     width: 100%;
@@ -145,58 +191,576 @@
     animation: rise 0.9s ease forwards 1.2s;
   }
 
-  .announcement {
-    background: var(--navy);
-    border-top: 1px solid rgba(255,255,255,0.07);
-    flex: 1;
+  .scroll-cue {
+    position: absolute;
+    bottom: 2rem;
+    right: 2.5rem;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: rise 1s ease forwards 1.6s;
   }
 
-  .announcement-inner {
+  .scroll-cue span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(242,236,227,0.3);
+    writing-mode: vertical-rl;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(242,236,227,0.3), transparent);
+    animation: scrollPulse 2s ease-in-out infinite 2s;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.7; transform: scaleY(1.3); transform-origin: top; }
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    border-top: 1px solid var(--rule);
+  }
+
+  .section-inner {
     max-width: 900px;
     margin: 0 auto;
-    padding: 3.5rem 2.5rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 4rem;
-    align-items: start;
+    padding: 4.5rem 2.5rem;
   }
 
-  @media (max-width: 660px) {
-    .announcement-inner {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-      padding: 2.5rem 1.5rem 3rem;
-    }
-    h1 { font-size: clamp(2.8rem, 12vw, 5rem); }
-    .topbar { padding: 1.25rem 1.5rem; }
-    .hero-content { padding: 0 1.5rem 3.5rem; }
-    .contact-block { text-align: left; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
-  .announce-text p {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(1rem, 1.8vw, 1.2rem);
-    line-height: 1.85;
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin-bottom: 1.75rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .body-text {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.9;
     color: var(--muted);
     font-weight: 300;
-    max-width: 520px;
+    max-width: 560px;
   }
 
-  .announce-text p strong {
+  .body-text strong {
     color: var(--cream);
     font-weight: 500;
   }
 
-  .announce-text p + p {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    color: rgba(242,236,227,0.4);
+  .body-text + .body-text {
+    margin-top: 1.1rem;
   }
 
-  .contact-block {
-    text-align: right;
+  /* ── INTRO / SPIRIT SECTION ── */
+  #spirit { background: var(--navy); }
+
+  .spirit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .spirit-pull {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--cream);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.5rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .spirit-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  /* ── COURSE SECTION ── */
+  #course { background: var(--deep); }
+
+  .course-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .course-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  .arm-block {
+    padding: 2rem;
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .arm-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--teal);
+  }
+
+  .arm-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.25rem;
+  }
+
+  .arm-waypoints {
+    list-style: none;
+  }
+
+  .arm-waypoints li {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--cream);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .arm-waypoints li:last-child { border-bottom: none; }
+
+  .wp-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    min-width: 1.5rem;
+  }
+
+  .wp-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 300;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+  }
+
+  .course-stats {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+
+  .stat {
+    padding: 1.5rem;
+    border-right: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-value em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(242,236,227,0.55);
+    margin-top: 0.5rem;
+    display: block;
+  }
+
+  @media (max-width: 540px) {
+    .course-stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid var(--rule); }
+    .stat:last-child { border-bottom: none; }
+  }
+
+  .course-map-wrap {
+    margin-top: 3rem;
+    overflow: hidden;
+  }
+
+  .map-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .map-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: none;
+  }
+
+  /* SVG overlay — re-enable when mark overlay is reinstated
+  .map-container svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  */
+
+  /* ── WHY CHANGING ── */
+  #why { background: var(--navy); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    .why-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  .reasons-list {
+    list-style: none;
+    margin-top: 0.5rem;
+  }
+
+  .reasons-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--muted);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .reasons-list li:last-child { border-bottom: none; }
+
+  .reason-mark {
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    margin-top: 0.25rem;
     flex-shrink: 0;
   }
+
+  /* ── ELIGIBILITY ── */
+  #eligibility { background: var(--deep); }
+
+  .elig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .elig-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .elig-card {
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    position: relative;
+  }
+
+  .elig-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .py-range {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .py-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgba(242,236,227,0.55);
+  }
+
+  .restriction-block {
+    margin-top: 3rem;
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 2rem;
+    background: rgba(201,168,76,0.03);
+  }
+
+  .restriction-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .restriction-list {
+    list-style: none;
+  }
+
+  .restriction-list li {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .restriction-list li:last-child { border-bottom: none; }
+
+  .restriction-list li::before {
+    content: '✕';
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(201,168,76,0.5);
+    flex-shrink: 0;
+  }
+
+  /* ── ENTRY / NOR ── */
+  #entry { background: var(--navy); }
+
+  .entry-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .entry-cols { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .entry-card {
+    border: 1px solid var(--rule);
+    padding: 2.25rem;
+  }
+
+  .entry-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+
+  .entry-card-body {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .entry-card-body strong {
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  .btn-placeholder {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid rgba(0,168,181,0.3);
+    padding: 0.7rem 1.25rem;
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .btn-placeholder::before {
+    content: '→ ';
+  }
+
+  /* ── SCHEDULE ── */
+  #schedule { background: var(--deep); }
+
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  .schedule-table tr {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .schedule-table tr:last-child { border-bottom: none; }
+
+  .schedule-table td {
+    padding: 1.1rem 0;
+    vertical-align: top;
+  }
+
+  .schedule-table td:first-child {
+    color: var(--teal);
+    width: 8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .schedule-table td:last-child {
+    color: var(--muted);
+  }
+
+  .schedule-note {
+    margin-top: 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    color: rgba(242,236,227,0.45);
+    text-transform: uppercase;
+  }
+
+  /* ── RESULTS / MEDIA / FAQ ── */
+  #results { background: var(--navy); }
+
+  .placeholder-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 2.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .placeholder-row { grid-template-columns: 1fr; }
+  }
+
+  .placeholder-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--rule);
+    padding: 2rem;
+  }
+
+  .placeholder-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .placeholder-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .placeholder-card-body {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--faint);
+  }
+
+  .placeholder-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(0,168,181,0.35);
+    border-bottom: 1px solid rgba(0,168,181,0.15);
+    padding-bottom: 0.2rem;
+    text-decoration: none;
+    cursor: default;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--deep); }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 660px) {
+    .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  .contact-block { text-align: right; }
 
   .contact-label {
     font-family: 'DM Mono', monospace;
@@ -220,10 +784,7 @@
     transition: color 0.2s, border-color 0.2s;
   }
 
-  .contact-email:hover {
-    color: var(--teal);
-    border-color: var(--teal);
-  }
+  .contact-email:hover { color: var(--teal); border-color: var(--teal); }
 
   .contact-club {
     margin-top: 1.25rem;
@@ -234,8 +795,33 @@
     line-height: 1.9;
   }
 
+  .save-date {
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    margin-top: 0.5rem;
+  }
+
+  .save-date-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .save-date-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+
+  /* ── FOOTER ── */
   footer {
-    border-top: 1px solid rgba(255,255,255,0.05);
+    border-top: 1px solid var(--rule);
     padding: 1.5rem 2.5rem;
     display: flex;
     justify-content: space-between;
@@ -261,14 +847,49 @@
     color: rgba(255,255,255,0.18);
   }
 
+  /* ── MOBILE ── */
+  @media (max-width: 660px) {
+    h1 { font-size: clamp(2.8rem, 12vw, 5rem); }
+    .topbar { padding: 1.25rem 1.5rem; }
+    .hero-content { padding: 0 1.5rem 3.5rem; }
+    .section-inner { padding: 3rem 1.5rem; }
+    .contact-block { text-align: left; }
+  }
+
+  /* ── ANIMATIONS ── */
   @keyframes rise {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
 </head>
 <body>
 
+<!-- ── NAV ── -->
+<nav id="site-nav">
+  <span class="nav-logo">AODR 2026</span>
+  <ul class="nav-links">
+    <li><a href="#course">The Race</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#eligibility">Eligibility</a></li>
+    <li><a href="#entry">Entry</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
 <div class="hero">
   <img class="hero-img" src="photo.jpg" alt="Racing dinghy at the Anglesey Offshore Dinghy Race">
   <div class="hero-overlay"></div>
@@ -292,31 +913,358 @@
     <div class="rule"></div>
     <p class="date-line">Sunday 9 August 2026 &mdash; Traeth Bychan</p>
   </div>
+
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
 </div>
 
-<div class="announcement">
-  <div class="announcement-inner">
-    <div class="announce-text">
-      <p>The <strong>Anglesey Offshore Dinghy Race</strong> returns in 2026 on <strong>Sunday 9 August</strong>, featuring a new Four Islands course starting and finishing at Red Wharf Bay Sailing &amp; Watersports Club, Traeth Bychan.</p>
-      <p>Full Notice of Race and further details will be published shortly.</p>
-    </div>
-    <div class="contact-block">
-      <span class="contact-label">Enquiries</span>
-      <a href="mailto:aodr@redwharfbaysc.co.uk" class="contact-email">aodr@redwharfbaysc.co.uk</a>
-      <div class="contact-club">
-        Red Wharf Bay Sailing<br>
-        &amp; Watersports Club<br>
-        Traeth Bychan, Anglesey<br>
-        LL73 8PN
+<!-- ── SPIRIT ── -->
+<section id="spirit" class="section">
+  <div class="section-inner">
+    <p class="section-label fade-in">The Race Returns</p>
+    <div class="spirit-grid">
+      <div>
+        <h2 class="section-title fade-in">A New Shape &mdash;<br><em>Same Spirit</em></h2>
+        <p class="body-text fade-in">If you've sailed the AODR before, you'll know the old course well: Beaumaris to Traeth Bychan, threading Puffin Sound and sweeping along the Ynys Môn coastline.</p>
+        <p class="body-text fade-in" style="margin-top:1rem;">For 2026, the course changes — and we want to be clear about why. The race is not becoming smaller. It is not becoming easier. It is not losing its coastal character.</p>
+        <p class="body-text fade-in" style="margin-top:1rem;">Instead, it is being reshaped so that it can be delivered properly, safely and sustainably from Traeth Bychan — <strong>without losing the adventure, judgement and endurance that define it</strong>.</p>
+        <p class="body-text fade-in" style="margin-top:1rem;">This is about building the next chapter of the race, not repeating the last one.</p>
+      </div>
+      <div class="fade-in">
+        <p class="spirit-pull">"The AODR has always been about adventure with purpose and a hard&#8209;earned finish along the coast of Ynys Môn. That remains unchanged."</p>
       </div>
     </div>
   </div>
+</section>
 
-  <footer>
-    <span class="footer-left">AODR 2026 &mdash; Anglesey Offshore Dinghy Race</span>
-    <span class="footer-right">Photo: Paul Hargreaves Photography</span>
-  </footer>
-</div>
+<!-- ── COURSE ── -->
+<section id="course" class="section">
+  <div class="section-inner">
+    <p class="section-label fade-in">The Four Islands · Pedair Ynys</p>
+    <h2 class="section-title fade-in">The <em>Course</em></h2>
+    <p class="body-text fade-in">An out-and-back course with two long arms stretching north and south from a central Start/Finish at Traeth Bychan. You sail one arm, return, then sail the other. The course takes you through the waters around four islands — Ynys Dulas, Moelfre Island, Puffin Island and Anglesey herself. The race passes close to each, but the marks of the course are physical buoys positioned in the adjacent waters. No island is itself a rounding mark. Benllech may be a permanently positioned navigation buoy; the remaining marks will be laid for the race. At Moelfre, competitors may have the unusual choice of which side to pass — a tactical decision that could shape your race.</p>
+
+    <div class="course-layout fade-in">
+      <div class="arm-block">
+        <p class="arm-label">Southern Arm</p>
+        <ul class="arm-waypoints">
+          <li><span class="wp-num">S1</span>Benllech</li>
+          <li><span class="wp-num">S2</span>Quarry</li>
+          <li><span class="wp-num">S3</span>Puffin Island <span class="wp-note">conditions permitting</span></li>
+        </ul>
+      </div>
+      <div class="arm-block" style="border-left-color: var(--gold);">
+        <p class="arm-label" style="color: var(--gold);">Northern Arm</p>
+        <ul class="arm-waypoints">
+          <li><span class="wp-num" style="color:var(--gold);">N1</span>Moelfre</li>
+          <li><span class="wp-num" style="color:var(--gold);">N2</span>Ynys Dulas <span class="wp-note">conditions permitting</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="course-stats fade-in">
+      <div class="stat">
+        <span class="stat-value">16.5<em>nm</em></span>
+        <span class="stat-label">Full Configuration</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">9.5<em>nm</em></span>
+        <span class="stat-label">Minimum Configuration</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">~4<em>hrs</em></span>
+        <span class="stat-label">Mid-fleet · Force 3</span>
+      </div>
+    </div>
+
+    <p class="body-text fade-in" style="margin-top:2rem; font-size:0.9rem; color: var(--faint);">The final course and mark order will be confirmed on the day once wind and sea conditions are known. In lighter conditions the course may be reduced; in stronger breeze it may be extended.</p>
+
+    <div class="course-map-wrap fade-in">
+      <div class="map-container">
+        <img src="map.jpg" alt="Anglesey Offshore Dinghy Race course area" style="position:relative;width:100%;height:auto;display:block;">
+        <!-- MARK OVERLAY — uncomment to reinstate styled SVG marks:
+        <svg viewBox="0 0 900 556" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="markglow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="72" cy="94" r="13" fill="rgba(0,168,181,0.18)"
+            stroke="#00a8b5" stroke-width="1.5" stroke-dasharray="4,2.5" filter="url(#markglow)"/>
+          <circle cx="72" cy="94" r="7" fill="#00a8b5" opacity="0.85"/>
+          <text x="90" y="89" font-family="'DM Mono', monospace" font-size="12"
+            fill="#00a8b5" letter-spacing="0.5">Ynys Dulas</text>
+          <text x="90" y="103" font-family="'DM Mono', monospace" font-size="8.5"
+            fill="rgba(0,168,181,0.5)" letter-spacing="0.3">conditions permitting</text>
+
+          <circle cx="191" cy="246" r="13" fill="rgba(0,168,181,0.18)"
+            stroke="#00a8b5" stroke-width="1.5" filter="url(#markglow)"/>
+          <circle cx="191" cy="246" r="7" fill="#00a8b5" opacity="0.9"/>
+          <text x="210" y="251" font-family="'DM Mono', monospace" font-size="12"
+            fill="#00a8b5" letter-spacing="0.5">Moelfre</text>
+
+          <circle cx="207" cy="306" r="16" fill="rgba(0,168,181,0.15)"
+            stroke="#00a8b5" stroke-width="1.8" filter="url(#markglow)"/>
+          <circle cx="207" cy="306" r="9" fill="#00a8b5" opacity="0.9"/>
+          <circle cx="207" cy="306" r="4" fill="#0d1f2d"/>
+          <text x="228" y="300" font-family="'DM Mono', monospace" font-size="12"
+            fill="#00a8b5" letter-spacing="0.5">Start / Finish</text>
+          <text x="228" y="314" font-family="'DM Mono', monospace" font-size="8.5"
+            fill="rgba(0,168,181,0.5)" letter-spacing="0.3">Traeth Bychan</text>
+
+          <circle cx="244" cy="374" r="13" fill="rgba(201,168,76,0.18)"
+            stroke="#c9a84c" stroke-width="1.5" filter="url(#markglow)"/>
+          <circle cx="244" cy="374" r="7" fill="#c9a84c" opacity="0.9"/>
+          <text x="263" y="379" font-family="'DM Mono', monospace" font-size="12"
+            fill="#c9a84c" letter-spacing="0.5">Benllech</text>
+
+          <circle cx="543" cy="390" r="13" fill="rgba(201,168,76,0.18)"
+            stroke="#c9a84c" stroke-width="1.5" filter="url(#markglow)"/>
+          <circle cx="543" cy="390" r="7" fill="#c9a84c" opacity="0.9"/>
+          <text x="562" y="385" font-family="'DM Mono', monospace" font-size="12"
+            fill="#c9a84c" letter-spacing="0.5">Quarry</text>
+
+          <circle cx="811" cy="395" r="13" fill="rgba(201,168,76,0.15)"
+            stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="4,2.5" filter="url(#markglow)"/>
+          <circle cx="811" cy="395" r="7" fill="#c9a84c" opacity="0.75"/>
+          <text x="830" y="390" font-family="'DM Mono', monospace" font-size="12"
+            fill="#c9a84c" letter-spacing="0.5">Puffin</text>
+          <text x="830" y="403" font-family="'DM Mono', monospace" font-size="8.5"
+            fill="rgba(201,168,76,0.5)" letter-spacing="0.3">conditions permitting</text>
+
+        </svg>
+        -->
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VIDEO ── -->
+<section id="video" class="section" style="background: var(--deep);">
+  <div class="section-inner">
+    <p class="section-label fade-in">The Course · Pedair Ynys</p>
+    <h2 class="section-title fade-in">Course <em>Video</em></h2>
+    <p class="body-text fade-in" style="max-width:560px;">The race area — Traeth Bychan, the coastline and the waters of Ynys Môn, seen from above.</p>
+    <!-- VIDEO EMBED — reinstate iframe when YouTube URL is available:
+      <div class="fade-in" style="margin-top:2.5rem; border:1px solid rgba(255,255,255,0.07); aspect-ratio:16/9; position:relative; overflow:hidden;">
+        <iframe
+          src="https://www.youtube.com/embed/VIDEO_ID"
+          width="100%" height="100%"
+          style="border:0;position:absolute;inset:0;"
+          allow="autoplay" allowfullscreen
+        ></iframe>
+      </div>
+    -->
+    <div class="fade-in" style="margin-top:2.5rem; border:1px solid rgba(255,255,255,0.07); aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+      <p style="font-family:'DM Mono',monospace; font-size:0.65rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(0,168,181,0.45);">Course video — coming shortly</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY CHANGING ── -->
+<section id="why" class="section">
+  <div class="section-inner">
+    <p class="section-label fade-in">Context</p>
+    <div class="why-grid">
+      <div>
+        <h2 class="section-title fade-in">Why the<br>Course is<br><em>Changing</em></h2>
+        <p class="body-text fade-in">The previous course was a classic. Many of us have raced it for decades. But times change. Launching in one location and finishing in another adds complexity for competitors and volunteers alike. Modern safety expectations demand more structure and coordination than they did in the 1960s — when planing 505s famously outran the safety fleet.</p>
+        <p class="body-text fade-in" style="margin-top:1rem;">The ambition is unchanged. What changes is how we deliver it.</p>
+      </div>
+      <div>
+        <ul class="reasons-list fade-in">
+          <li><span class="reason-mark">—</span>Preserve the spirit of adventure and exposure that defines the race</li>
+          <li><span class="reason-mark">—</span>Base safety and race management from a single location</li>
+          <li><span class="reason-mark">—</span>Adapt the distance to match the wind strength</li>
+          <li><span class="reason-mark">—</span>Make the event achievable for capable club sailors</li>
+          <li><span class="reason-mark">—</span>Build a format that can grow in future years</li>
+          <li><span class="reason-mark">—</span>Target a fleet of around <strong>40 boats</strong> in 2026</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ELIGIBILITY ── -->
+<section id="eligibility" class="section">
+  <div class="section-inner">
+    <p class="section-label fade-in">Who Can Enter</p>
+    <h2 class="section-title fade-in"><em>Eligibility</em> &amp;<br>Handicap</h2>
+    <p class="body-text fade-in">Open to monohull dinghies and selected non-foiling multihulls suitable for sustained coastal sailing. We would particularly like to see a strong turnout from club sailors across Ynys Môn and beyond — boats and crews comfortable with open water, tidal planning and a proper day's racing.</p>
+
+    <div class="elig-grid fade-in">
+      <div class="elig-card">
+        <span class="elig-card-label">Monohulls · PY Range</span>
+        <p class="py-range">896 – 1300</p>
+        <p class="py-desc">RYA Portsmouth Yardstick 2025</p>
+      </div>
+      <div class="elig-card">
+        <span class="elig-card-label">Multihulls (non-foiling) · PY Range</span>
+        <p class="py-range">800 – 924</p>
+        <p class="py-desc">RYA Portsmouth Yardstick 2025</p>
+      </div>
+    </div>
+
+    <p class="body-text fade-in" style="margin-top:1.5rem; font-size:0.85rem; color:var(--faint);">Boats outside these bands may be accepted at the discretion of the Organising Authority. Full eligibility details are defined in the Notice of Race.</p>
+
+    <div class="restriction-block fade-in">
+      <span class="restriction-label">Not Accepted for 2026</span>
+      <ul class="restriction-list">
+        <li>Boats where all crew trapeze (single and double-handed)</li>
+        <li>Foiling boats</li>
+        <li>Sliding seat boats</li>
+      </ul>
+      <p class="body-text" style="margin-top:1.25rem; font-size:0.82rem; color:rgba(242,236,227,0.3);">This is a decision about fleet management and safety focus for this format this year — not a comment on the capability of those classes. We hope future editions may evolve as the race grows.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── ENTRY ── -->
+<section id="entry" class="section">
+  <div class="section-inner">
+    <p class="section-label fade-in">Notice of Race &amp; Entry</p>
+    <h2 class="section-title fade-in">How to<br><em>Enter</em></h2>
+
+    <div class="entry-cols fade-in">
+      <div class="entry-card">
+        <h3 class="entry-card-title">Notice of Race</h3>
+        <p class="entry-card-body">The 2026 Notice of Race is currently being finalised and will be published in <strong>early April</strong>. It will include full details of eligibility, safety requirements, entry procedures and race management.</p>
+        <span class="btn-placeholder">Download NOR</span>
+      </div>
+      <div class="entry-card">
+        <h3 class="entry-card-title">Online Entry</h3>
+        <p class="entry-card-body">Online entry will open once the Notice of Race has been published. Entry fees are <strong>TBC</strong> and will be confirmed in the NOR. An entry link will appear here.</p>
+        <span class="btn-placeholder">Enter Online</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SCHEDULE ── -->
+<section id="schedule" class="section">
+  <div class="section-inner">
+    <p class="section-label fade-in">Sunday 9 August 2026</p>
+    <h2 class="section-title fade-in">Provisional<br><em>Schedule</em></h2>
+
+    <table class="schedule-table fade-in">
+      <tbody>
+        <tr>
+          <td>10:15</td>
+          <td>Planned start</td>
+        </tr>
+        <tr>
+          <td>15:15</td>
+          <td>Time limit (5 hours)</td>
+        </tr>
+        <tr>
+          <td>After racing</td>
+          <td>Prizegiving — as soon as practicable</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="schedule-note fade-in">Final timings will be confirmed in the Sailing Instructions · Traeth Bychan, Ynys Môn · LL73 8PN</p>
+  </div>
+</section>
+
+<!-- ── RESULTS / MEDIA / FAQ ── -->
+<section id="results" class="section">
+  <div class="section-inner">
+    <p class="section-label fade-in">Post-Race</p>
+    <h2 class="section-title fade-in">Results, <em>Media</em><br>&amp; Resources</h2>
+
+    <div class="placeholder-row fade-in">
+      <div class="placeholder-card">
+        <span class="placeholder-card-label">Results</span>
+        <p class="placeholder-card-title">Race Results</p>
+        <p class="placeholder-card-body">Published online as soon as possible after racing on 9 August 2026.</p>
+        <span class="placeholder-link">Results — available after race day</span>
+      </div>
+      <div class="placeholder-card">
+        <span class="placeholder-card-label">Photography &amp; Video</span>
+        <p class="placeholder-card-title">Media Gallery</p>
+        <p class="placeholder-card-body">Race photos and video will be hosted externally and linked here after the event.</p>
+        <a class="placeholder-link" href="https://www.flickr.com/photos/199487595@N02/collections/72157722415541037/" target="_blank" style="cursor:pointer;opacity:1;color:rgba(0,168,181,0.7);border-color:rgba(0,168,181,0.3);">View Photo Gallery →</a>
+      </div>
+      <div class="placeholder-card">
+        <span class="placeholder-card-label">Competitor Info</span>
+        <p class="placeholder-card-title">FAQ</p>
+        <p class="placeholder-card-body">A full competitor FAQ will be maintained and linked here ahead of the race.</p>
+        <span class="placeholder-link">FAQ — coming soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="section">
+  <div class="section-inner">
+    <p class="section-label fade-in">Get in Touch</p>
+    <div class="contact-layout">
+      <div>
+        <h2 class="section-title fade-in"><em>Contact</em></h2>
+        <p class="body-text fade-in">Race enquiries of any kind should be directed to the AODR team. We will do our best to respond promptly. Further details, including the Notice of Race and entry information, will be published in early April.</p>
+        <div class="save-date fade-in" style="margin-top:2rem;">
+          <span class="save-date-label">Save the Date</span>
+          <p class="save-date-value">Sunday<br>9 August 2026<br>Traeth Bychan, Ynys Môn</p>
+        </div>
+      </div>
+      <div class="contact-block fade-in">
+        <span class="contact-label">Enquiries</span>
+        <span class="contact-email">aodr (at) redwharfbaysc.co.uk</span>
+        <div class="contact-club">
+          Red Wharf Bay Sailing<br>
+          &amp; Watersports Club<br>
+          Traeth Bychan, Anglesey<br>
+          LL73 8PN<br><br>
+          <a href="https://www.redwharfbaysc.co.uk" target="_blank" style="color:rgba(0,168,181,0.4); text-decoration:none; border-bottom: 1px solid rgba(0,168,181,0.2); padding-bottom:0.1rem;">redwharfbaysc.co.uk</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-left">AODR 2026 &mdash; Anglesey Offshore Dinghy Race &mdash; © Red Wharf Bay Sailing &amp; Watersports Club</span>
+  <span class="footer-right">Photo: Paul Hargreaves Photography</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Nav appears after hero
+  const nav = document.getElementById('site-nav');
+  const hero = document.querySelector('.hero');
+
+  const navObserver = new IntersectionObserver(([entry]) => {
+    nav.classList.toggle('visible', !entry.isIntersecting);
+  }, { threshold: 0.1 });
+
+  navObserver.observe(hero);
+
+  // Fade-in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+  fadeEls.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      fadeObserver.observe(el);
+    }
+  });
+</script>
 
 </body>
 </html>
