@@ -18,6 +18,9 @@
     --muted: rgba(242,236,227,0.6);
     --faint: rgba(242,236,227,0.45);
     --rule: rgba(255,255,255,0.07);
+    --chart: #e8f0f5;
+    --chart-dark: #1a2e3d;
+    --chart-rule: rgba(26,46,61,0.12);
   }
 
   html { scroll-behavior: smooth; }
@@ -315,7 +318,66 @@
   }
 
   /* ── COURSE SECTION ── */
-  #course { background: var(--deep); }
+  #course { background: var(--chart); }
+
+  #course .section-label {
+    color: var(--teal);
+  }
+
+  #course .section-label::after {
+    background: var(--chart-rule);
+  }
+
+  #course .section-title {
+    color: var(--chart-dark);
+  }
+
+  #course .section-title em {
+    color: var(--teal);
+  }
+
+  #course .body-text {
+    color: rgba(26,46,61,0.75);
+  }
+
+  #course .body-text strong {
+    color: var(--chart-dark);
+  }
+
+  #course .arm-block {
+    border-color: var(--chart-rule);
+    background: rgba(255,255,255,0.5);
+  }
+
+  #course .arm-waypoints li {
+    color: var(--chart-dark);
+    border-bottom-color: var(--chart-rule);
+  }
+
+  #course .wp-note {
+    color: rgba(26,46,61,0.4);
+  }
+
+  #course .course-stats {
+    border-color: var(--chart-rule);
+    background: rgba(255,255,255,0.5);
+  }
+
+  #course .stat {
+    border-right-color: var(--chart-rule);
+  }
+
+  #course .stat-value {
+    color: var(--chart-dark);
+  }
+
+  #course .stat-value em {
+    color: var(--teal);
+  }
+
+  #course .stat-label {
+    color: rgba(26,46,61,0.5);
+  }
 
   .course-layout {
     display: grid;
@@ -940,8 +1002,12 @@
 </section>
 
 <!-- ── COURSE ── -->
-<section id="course" class="section">
-  <div class="section-inner">
+<section id="course" class="section" style="position:relative;">
+  <!-- Top transition: dark → light -->
+  <div style="position:absolute;top:0;left:0;right:0;height:3rem;background:linear-gradient(to bottom, var(--deep), var(--chart));pointer-events:none;z-index:1;"></div>
+  <!-- Bottom transition: light → dark (next section is --deep video) -->
+  <div style="position:absolute;bottom:0;left:0;right:0;height:3rem;background:linear-gradient(to bottom, var(--chart), var(--deep));pointer-events:none;z-index:1;"></div>
+  <div class="section-inner" style="position:relative;z-index:2;">
     <p class="section-label fade-in">The Four Islands · Pedair Ynys</p>
     <h2 class="section-title fade-in">The <em>Course</em></h2>
     <p class="body-text fade-in">An out-and-back course with two long arms stretching north and south from a central Start/Finish at Traeth Bychan. You sail one arm, return, then sail the other. The course takes you through the waters around four islands — Ynys Dulas, Moelfre Island, Puffin Island and Anglesey herself. The race passes close to each, but the marks of the course are physical buoys positioned in the adjacent waters. No island is itself a rounding mark. Benllech may be a permanently positioned navigation buoy; the remaining marks will be laid for the race. At Moelfre, competitors may have the unusual choice of which side to pass — a tactical decision that could shape your race.</p>
@@ -955,7 +1021,7 @@
           <li><span class="wp-num">S3</span>Puffin Island <span class="wp-note">conditions permitting</span></li>
         </ul>
       </div>
-      <div class="arm-block" style="border-left-color: var(--gold);">
+      <div class="arm-block" style="border-left-color: var(--gold); background:rgba(255,255,255,0.5);">
         <p class="arm-label" style="color: var(--gold);">Northern Arm</p>
         <ul class="arm-waypoints">
           <li><span class="wp-num" style="color:var(--gold);">N1</span>Moelfre</li>
@@ -979,7 +1045,7 @@
       </div>
     </div>
 
-    <p class="body-text fade-in" style="margin-top:2rem; font-size:0.9rem; color: var(--faint);">The final course and mark order will be confirmed on the day once wind and sea conditions are known. In lighter conditions the course may be reduced; in stronger breeze it may be extended.</p>
+    <p class="body-text fade-in" style="margin-top:2rem; font-size:0.9rem;">The final course and mark order will be confirmed on the day once wind and sea conditions are known. In lighter conditions the course may be reduced; in stronger breeze it may be extended.</p>
 
     <div class="course-map-wrap fade-in">
       <div class="map-container">
@@ -1041,6 +1107,7 @@
       </div>
     </div>
     </div>
+  </div>
   </div>
 </section>
 
