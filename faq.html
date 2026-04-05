@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Anglesey Offshore Dinghy Race 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1f2d;
+    --deep: #0a1520;
+    --teal: #00a8b5;
+    --cream: #f2ece3;
+    --gold: #c9a84c;
+    --muted: rgba(242,236,227,0.6);
+    --faint: rgba(242,236,227,0.7);
+    --rule: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,21,32,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 2.5rem;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  .nav-back {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--cream); }
+  .nav-back::before { content: '← '; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    background: var(--navy);
+    border-bottom: 1px solid var(--rule);
+    padding: 4rem 2.5rem 3.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .page-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .page-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+  }
+
+  .page-title em {
+    font-style: italic;
+    color: var(--teal);
+  }
+
+  .page-intro {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 520px;
+  }
+
+  /* ── FAQ CONTENT ── */
+  .faq-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2.5rem 5rem;
+  }
+
+  /* ── FAQ GROUP ── */
+  .faq-group {
+    border-top: 1px solid var(--rule);
+    padding-top: 3rem;
+    margin-top: 3rem;
+  }
+
+  .faq-group:first-child {
+    margin-top: 0;
+    padding-top: 3rem;
+  }
+
+  .faq-group-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .faq-group-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.15);
+  }
+
+  /* ── FAQ ITEM ── */
+  .faq-item {
+    border-bottom: 1px solid var(--rule);
+    padding: 1.75rem 0;
+  }
+
+  .faq-item:last-child { border-bottom: none; }
+
+  .faq-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.35;
+    margin-bottom: 0.9rem;
+  }
+
+  .faq-a {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 620px;
+  }
+
+  .faq-a strong {
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  .faq-a + .faq-a {
+    margin-top: 0.75rem;
+  }
+
+  /* ── STANDALONE Q (no group label) ── */
+  .faq-standalone {
+    border-bottom: 1px solid var(--rule);
+    padding: 1.75rem 0;
+  }
+
+  /* ── AWAY SECTION (Making a Weekend) ── */
+  .faq-prose {
+    border-top: 1px solid var(--rule);
+    padding-top: 3rem;
+    margin-top: 3rem;
+  }
+
+  .faq-prose-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .faq-prose-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.15);
+  }
+
+  .faq-prose-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .faq-prose p {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--muted);
+    font-weight: 300;
+    max-width: 620px;
+    margin-bottom: 0.85rem;
+  }
+
+  /* ── CTA STRIP ── */
+  .faq-cta {
+    border-top: 1px solid var(--rule);
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .faq-cta-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .faq-cta-text strong {
+    color: var(--cream);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .faq-cta-email {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 0.4rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .footer-left {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .footer-right {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.15);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 660px) {
+    .page-header { padding: 3rem 1.5rem 2.5rem; }
+    .faq-wrap { padding: 0 1.5rem 4rem; }
+    nav { padding: 0 1.5rem; }
+    footer { padding: 1.5rem; }
+  }
+
+  /* ── FADE IN ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">AODR 2026</a>
+  <a href="index.html" class="nav-back">Back to main site</a>
+</nav>
+
+<!-- ── PAGE HEADER ── -->
+<div style="background: var(--navy); border-bottom: 1px solid var(--rule);">
+  <div class="page-header">
+    <p class="page-tag fade-in">Competitor Information</p>
+    <h1 class="page-title fade-in">Frequently<br><em>Asked</em><br>Questions</h1>
+    <p class="page-intro fade-in">Common questions about the 2026 race. The Notice of Race and Sailing Instructions will contain the definitive detail — published April and June 2026 respectively.</p>
+  </div>
+</div>
+
+<!-- ── FAQ CONTENT ── -->
+<div class="faq-wrap">
+
+  <div class="faq-group fade-in">
+    <p class="faq-group-label">Entry &amp; Eligibility</p>
+
+    <div class="faq-item">
+      <p class="faq-q">How do I enter?</p>
+      <p class="faq-a">Entry will open in April 2026 once the Notice of Race is published. The entry link will appear on the main race page when available.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Is the race suitable for me?</p>
+      <p class="faq-a">The race is aimed at sailors who are confident sailing for extended periods, comfortable outside sheltered water, and able to manage their boat and themselves without assistance. It is not a beginner event, but is intended to be more accessible than previous offshore editions.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What boats are eligible?</p>
+      <p class="faq-a">Full eligibility details are in the Notice of Race and covered on the main race page, including the PY band and excluded classes.</p>
+    </div>
+  </div>
+
+  <div class="faq-group fade-in">
+    <p class="faq-group-label">Race Day</p>
+
+    <div class="faq-item">
+      <p class="faq-q">What's the time limit?</p>
+      <p class="faq-a">Five hours. The planned start is 10:15, with a finish cut-off at 15:15. Boats that cannot reasonably complete the course within that window may be recalled or directed to finish early. Final timings will be confirmed in the Sailing Instructions, published June 2026.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Do I need to sign on?</p>
+      <p class="faq-a">Yes. A safety sign-on process will operate on race day. Full details in the Sailing Instructions.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">What about insurance and liability?</p>
+      <p class="faq-a">The safety of a boat and her entire management, including insurance, is the responsibility of the helm. Full details will be in the Notice of Race.</p>
+    </div>
+
+    <div class="faq-item">
+      <p class="faq-q">Do I need to move between venues?</p>
+      <p class="faq-a">No. One of the key benefits of the 2026 format is a single venue throughout. No shuttle or retrieval at a separate location.</p>
+    </div>
+  </div>
+
+  <div class="faq-prose fade-in">
+    <p class="faq-prose-label">Making a Weekend of It</p>
+    <p>August on Anglesey is worth the trip regardless. Traeth Bychan sits on the east coast of the island, within a short drive of Red Wharf Bay, the village of Moelfre, and Lligwy Beach. Camping is plentiful nearby, with several sites within a mile or two of the water. B&amp;Bs, holiday cottages, and caravan parks are well-established in this part of the island. Beaumaris, with its castle and waterfront, is about twenty minutes south. Snowdonia is visible across the strait on a clear day.</p>
+    <p>The island's 125-mile coastline, its Area of Outstanding Natural Beauty designation, and the quality of the east coast sailing water are part of what makes this event worth building into a longer stay.</p>
+  </div>
+
+  <div class="faq-cta fade-in">
+    <div class="faq-cta-text">
+      <strong>Further questions</strong>
+      Contact the AODR team
+    </div>
+    <span class="faq-cta-email">aodr (at) redwharfbaysc.co.uk</span>
+  </div>
+
+  <div class="fade-in" style="margin-top:2rem; padding-top:2rem; border-top:1px solid var(--rule);">
+    <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);">Notice of Race published April 2026 &nbsp;&middot;&nbsp; Sailing Instructions published June 2026</p>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-left">AODR 2026 &mdash; Anglesey Offshore Dinghy Race &mdash; © Red Wharf Bay Sailing &amp; Watersports Club</span>
+  <span class="footer-right">v3.1</span>
+</footer>
+
+<script>
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+  fadeEls.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.classList.add('visible');
+    } else {
+      observer.observe(el);
+    }
+  });
+</script>
+
+</body>
+</html>

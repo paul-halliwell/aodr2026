@@ -15,8 +15,8 @@
     --teal: #00a8b5;
     --cream: #f2ece3;
     --gold: #c9a84c;
-    --muted: rgba(242,236,227,0.6);
-    --faint: rgba(242,236,227,0.45);
+    --muted: rgba(242,236,227,0.78);
+    --faint: rgba(242,236,227,0.7);
     --rule: rgba(255,255,255,0.07);
     --chart: #e8f0f5;
     --chart-dark: #1a2e3d;
@@ -135,7 +135,7 @@
     font-size: 0.62rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(242,236,227,0.5);
+    color: rgba(242,236,227,0.72);
     text-align: right;
     opacity: 0;
     animation: rise 0.8s ease forwards 0.5s;
@@ -212,14 +212,14 @@
     font-size: 0.52rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(242,236,227,0.3);
+    color: rgba(242,236,227,0.6);
     writing-mode: vertical-rl;
   }
 
   .scroll-line {
     width: 1px;
     height: 40px;
-    background: linear-gradient(to bottom, rgba(242,236,227,0.3), transparent);
+    background: linear-gradient(to bottom, rgba(242,236,227,0.6), transparent);
     animation: scrollPulse 2s ease-in-out infinite 2s;
   }
 
@@ -484,7 +484,7 @@
     font-size: 0.58rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(242,236,227,0.55);
+    color: rgba(242,236,227,0.68);
     margin-top: 0.5rem;
     display: block;
   }
@@ -607,7 +607,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.1em;
-    color: rgba(242,236,227,0.55);
+    color: rgba(242,236,227,0.68);
   }
 
   .restriction-block {
@@ -703,6 +703,18 @@
     cursor: default;
   }
 
+  a.placeholder-link {
+    cursor: pointer;
+    opacity: 1;
+    color: rgba(0,168,181,0.8);
+    border-color: rgba(0,168,181,0.4);
+  }
+
+  a.placeholder-link:hover {
+    color: var(--teal);
+    border-color: var(--teal);
+  }
+
   .btn-placeholder::before {
     content: '→ ';
   }
@@ -746,7 +758,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.6rem;
     letter-spacing: 0.14em;
-    color: rgba(242,236,227,0.45);
+    color: rgba(242,236,227,0.7);
     text-transform: uppercase;
   }
 
@@ -808,6 +820,18 @@
     cursor: default;
   }
 
+  a.placeholder-link {
+    cursor: pointer;
+    opacity: 1;
+    color: rgba(0,168,181,0.8);
+    border-color: rgba(0,168,181,0.4);
+  }
+
+  a.placeholder-link:hover {
+    color: var(--teal);
+    border-color: var(--teal);
+  }
+
   /* ── CONTACT ── */
   #contact { background: var(--deep); }
 
@@ -853,7 +877,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.62rem;
     letter-spacing: 0.1em;
-    color: rgba(242,236,227,0.25);
+    color: rgba(242,236,227,0.6);
     line-height: 1.9;
   }
 
@@ -1178,7 +1202,7 @@
         <li>Boats where all crew trapeze (single and double-handed)</li>
         <li>Sliding seat boats</li>
       </ul>
-      <p class="body-text" style="margin-top:1.25rem; font-size:0.82rem; color:rgba(242,236,227,0.3);">This is a decision about fleet management and safety focus for this format this year — not a comment on the capability of those classes. We hope future editions may evolve as the race grows.</p>
+      <p class="body-text" style="margin-top:1.25rem; font-size:0.82rem; color:rgba(242,236,227,0.6);">This is a decision about fleet management and safety focus for this format this year — not a comment on the capability of those classes. We hope future editions may evolve as the race grows.</p>
     </div>
   </div>
 </section>
@@ -1252,8 +1276,8 @@
       <div class="placeholder-card">
         <span class="placeholder-card-label">Competitor Info</span>
         <p class="placeholder-card-title">FAQ</p>
-        <p class="placeholder-card-body">A full competitor FAQ will be maintained and linked here ahead of the race.</p>
-        <span class="placeholder-link">FAQ — coming soon</span>
+        <p class="placeholder-card-body">Common questions about eligibility, the course, race day logistics and what to expect.</p>
+        <a class="placeholder-link" href="faq.html" style="cursor:pointer;opacity:1;color:rgba(0,168,181,0.7);border-color:rgba(0,168,181,0.3);">Competitor FAQ →</a>
       </div>
     </div>
   </div>
@@ -1290,7 +1314,7 @@
 <!-- ── FOOTER ── -->
 <footer>
   <span class="footer-left">AODR 2026 &mdash; Anglesey Offshore Dinghy Race &mdash; © Red Wharf Bay Sailing &amp; Watersports Club</span>
-  <span class="footer-right">Photo: Paul Hargreaves Photography</span>
+  <span class="footer-right" style="display:flex;gap:2rem;align-items:center;"><span style="color:rgba(255,255,255,0.35);font-style:normal;">Photo: Paul Hargreaves Photography</span> <span style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);font-style:normal;border:1px solid rgba(0,168,181,0.3);padding:0.2rem 0.5rem;">v3.1</span></span>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
