@@ -23,13 +23,13 @@
     --chart-rule: rgba(26,46,61,0.12);
   }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; font-size: 17px; }
 
   body {
     background: var(--deep);
     color: var(--cream);
     font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     min-height: 100vh;
   }
 
@@ -274,10 +274,10 @@
   }
 
   .body-text {
-    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    font-size: clamp(1.05rem, 1.7vw, 1.2rem);
     line-height: 1.9;
     color: var(--muted);
-    font-weight: 300;
+    font-weight: 400;
     max-width: 560px;
   }
 
@@ -682,6 +682,7 @@
     font-size: 0.9rem;
     line-height: 1.8;
     color: var(--muted);
+    font-weight: 400;
     margin-bottom: 1.5rem;
   }
 
@@ -701,6 +702,26 @@
     padding: 0.7rem 1.25rem;
     opacity: 0.5;
     cursor: default;
+  }
+
+  .btn-nor {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--teal);
+    border: 1px solid var(--teal);
+    padding: 0.7rem 1.25rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-nor:hover {
+    background: transparent;
+    color: var(--teal);
   }
 
   a.placeholder-link {
@@ -989,7 +1010,7 @@
       >
     </a>
     <div class="topbar-right">
-      Traeth Bychan · Anglesey<br>VHF Ch37
+      Traeth Bychan · Anglesey
     </div>
   </div>
 
@@ -1216,8 +1237,8 @@
     <div class="entry-cols fade-in">
       <div class="entry-card">
         <h3 class="entry-card-title">Notice of Race</h3>
-        <p class="entry-card-body">The 2026 Notice of Race is currently being finalised and will be published in <strong>early April</strong>. It will include full details of eligibility, safety requirements, entry procedures and race management.</p>
-        <span class="btn-placeholder">Download NOR</span>
+        <p class="entry-card-body">The 2026 Notice of Race is now available. It includes full details of eligibility, safety requirements, entry procedures and race management.</p>
+        <a href="AODR%20Notice%20of%20Race%202026.pdf" target="_blank" class="btn-nor">Download Notice of Race →</a>
       </div>
       <div class="entry-card">
         <h3 class="entry-card-title">Online Entry</h3>
@@ -1314,7 +1335,7 @@
 <!-- ── FOOTER ── -->
 <footer>
   <span class="footer-left">AODR 2026 &mdash; Anglesey Offshore Dinghy Race &mdash; © Red Wharf Bay Sailing &amp; Watersports Club</span>
-  <span class="footer-right" style="display:flex;gap:2rem;align-items:center;"><span style="color:rgba(255,255,255,0.35);font-style:normal;">Photo: Paul Hargreaves Photography</span> <span style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);font-style:normal;border:1px solid rgba(0,168,181,0.3);padding:0.2rem 0.5rem;">v3.1</span></span>
+  <span class="footer-right" style="display:flex;gap:2rem;align-items:center;"><span style="color:rgba(255,255,255,0.35);font-style:normal;">Photo: Paul Hargreaves Photography</span> <span style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);font-style:normal;border:1px solid rgba(0,168,181,0.3);padding:0.2rem 0.5rem;">v3.2</span></span>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
